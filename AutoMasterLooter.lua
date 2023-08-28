@@ -26,11 +26,13 @@ LootedItemsTable["Lava Core"] = "Lava Core"
 -- Whites and greens that are excluded from autoloot.
 ExcludedItemsTable = {}
 ExcludedItemsTable["Tome of Tranquilizing Shot"] = "Tranq Shot book"
+ExcludedItemsTable["Onyxia Hide Backpack"] = "Onyxia bag"
 ExcludedItemsTable["Hazza'rah's Dream Thread"] = "Hazzarah"
 ExcludedItemsTable["Gri'lek's Blood"] = "Grilek"
 ExcludedItemsTable["Wushoolay's Mane"] = "Wushoolay"
 ExcludedItemsTable["Renataki's Tooth"] = "Renataki"
 ExcludedItemsTable["Mr. Bigglesworth"] = "KT cat"
+
 
 local AutoMasterLooter = 0
 
