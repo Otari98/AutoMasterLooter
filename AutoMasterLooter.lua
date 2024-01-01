@@ -32,6 +32,8 @@ ExcludedItemsTable["Gri'lek's Blood"] = "Grilek"
 ExcludedItemsTable["Wushoolay's Mane"] = "Wushoolay"
 ExcludedItemsTable["Renataki's Tooth"] = "Renataki"
 ExcludedItemsTable["Mr. Bigglesworth"] = "KT cat"
+ExcludedItemsTable["Dream Frog"] = "Dream Frog"
+ExcludedItemsTable["Infinite Frog"] = "Infinite Frog"
 
 
 local AutoMasterLooter = 0
