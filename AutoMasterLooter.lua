@@ -14,6 +14,26 @@ LootedItemsTable = {}
 ExcludedItemsTable = {}
 --ExcludedItemsTable["Dripping Spider Mandible"] = "ugly vendor trash that we all hate"
 --ExcludedItemsTable["Runecloth"] = "remove the comment from these lines to make AML ignore them"
+ExcludedItemsTable["Bracers of Might"] = "t1" -- delete these lines if you want to Masterloot t1 BoEs to yourself
+ExcludedItemsTable["Belt of Might"] = "t1"
+ExcludedItemsTable["Vambraces of Prophecy"] = "t1"
+ExcludedItemsTable["Girdle of Prophecy"] = "t1"
+ExcludedItemsTable["Nightslayer Belt"] = "t1"
+ExcludedItemsTable["Nightslayer Bracelets"] = "t1"
+ExcludedItemsTable["Arcanist Belt"] = "t1"
+ExcludedItemsTable["Arcanist Bindings"] = "t1"
+ExcludedItemsTable["Cenarion Bracers"] = "t1"
+ExcludedItemsTable["Cenarion Belt"] = "t1"
+ExcludedItemsTable["Earthfury Belt"] = "t1"
+ExcludedItemsTable["Earthfury Bracers"] = "t1"
+ExcludedItemsTable["Felheart Belt"] = "t1"
+ExcludedItemsTable["Felheart Bracers"] = "t1"
+ExcludedItemsTable["Giantstalker's Belt"] = "t1"
+ExcludedItemsTable["Giantstalker's Bracers"] = "t1"
+ExcludedItemsTable["Lawbringer Bracers"] = "t1"
+ExcludedItemsTable["Lawbringer Belt"] = "t1"
+
+
 
 local AutoMasterLooter = 0
 
