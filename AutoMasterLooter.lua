@@ -1,7 +1,7 @@
 -- Events
 AutoMasterLooter = CreateFrame("Frame","AutoMasterLooter",UIParent)
 AutoMasterLooter:RegisterEvent("LOOT_OPENED")
-AutoMasterLooter:SetScript("OnEvent", function() AutoMasterLootEvent(event) end)
+AutoMasterLooter:SetScript("OnEvent", function() AutoMasterLootEvent() end)
 
 -- Soulbound items that you want to enforce looting ["exact ingame name of the item"] = "nickname can be anything(NECESSARY)"
 
@@ -83,7 +83,7 @@ SLASH_AUTOMASTERLOOTER2 = '/automl'
 SLASH_AUTOMASTERLOOTER3 = '/automasterloot'
 SlashCmdList.AUTOMASTERLOOTER = AutoMasterLooterSwitch
 
-local function AutoMasterLootEvent(event)
+function AutoMasterLootEvent()
 	lootmethod, masterlooterID = GetLootMethod()
 	if masterlooterID == 0 and AutoMasterLooter == 1 then -- Only run if the player is the masterlooter.
 		local announcestring = "Items inside:" -- Generate announce message
