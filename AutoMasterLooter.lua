@@ -122,6 +122,11 @@ local ExcludedItems = {
 	[19942] = "Hazza'rah's Dream Thread",
 	[19941] = "Wushoolay's Mane",
 	[54001] = "Dream Frog",
+	[37006] = "Skitterweb Hatchling",
+	[37009] = "Cavernweb Hatchling",
+	[37010] = "Razzashi Hatchling",
+	[37011] = "Araxxna's Hatchling",
+	[37012] = "Maexxna's Hatchling",
 }
 
 local function OnEvent()
