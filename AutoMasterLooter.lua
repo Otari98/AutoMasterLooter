@@ -1,183 +1,172 @@
--- Events
-AutoMasterLooter = CreateFrame("Frame","AutoMasterLooter",UIParent)
-AutoMasterLooter:RegisterEvent("PLAYER_ENTERING_WORLD")
-AutoMasterLooter:RegisterEvent("LOOT_OPENED")
-AutoMasterLooter:SetScript("OnEvent", function() OpenLoot_OnEvent(event, arg1) end)
-
--- Rares and epics that are subject to autoloot. ["exact ingame name of the item"] = "nickname (does nothing)"
-LootedItemsTable = {}
---Beasts Deck
-LootedItemsTable["Ace of Beasts"] = "Ace of Beasts"
-LootedItemsTable["Two of Beasts"] = "Two of Beasts"
-LootedItemsTable["Three of Beasts"] = "Three of Beasts"
-LootedItemsTable["Four of Beasts"] = "Four of Beasts"
-LootedItemsTable["Five of Beasts"] = "Five of Beasts"
-LootedItemsTable["Six of Beasts"] = "Six of Beasts"
-LootedItemsTable["Seven of Beasts"] = "Seven of Beasts"
-LootedItemsTable["Eight of Beasts"] = "Eight of Beasts"
---Warlords Deck
-LootedItemsTable["Ace of Warlords"] = "Ace of Warlords"
-LootedItemsTable["Two of Warlords"] = "Two of Warlords"
-LootedItemsTable["Three of Warlords"] = "Three of Warlords"
-LootedItemsTable["Four of Warlords"] = "Four of Warlords"
-LootedItemsTable["Five of Warlords"] = "Five of Warlords"
-LootedItemsTable["Six of Warlords"] = "Six of Warlords"
-LootedItemsTable["Seven of Warlords"] = "Seven of Warlords"
-LootedItemsTable["Eight of Warlords"] = "Eight of Warlords"
---Portals Deck
-LootedItemsTable["Ace of Portals"] = "Ace of Portals"
-LootedItemsTable["Two of Portals"] = "Two of Portals"
-LootedItemsTable["Three of Portals"] = "Three of Portals"
-LootedItemsTable["Four of Portals"] = "Four of Portals"
-LootedItemsTable["Five of Portals"] = "Five of Portals"
-LootedItemsTable["Six of Portals"] = "Six of Portals"
-LootedItemsTable["Seven of Portals"] = "Seven of Portals"
-LootedItemsTable["Eight of Portals"] = "Eight of Portals"
---Elementals Deck
-LootedItemsTable["Ace of Elementals"] = "Ace of Elementals"
-LootedItemsTable["Two of Elementals"] = "Two of Elementals"
-LootedItemsTable["Three of Elementals"] = "Three of Elementals"
-LootedItemsTable["Four of Elementals"] = "Four of Elementals"
-LootedItemsTable["Five of Elementals"] = "Five of Elementals"
-LootedItemsTable["Six of Elementals"] = "Six of Elementals"
-LootedItemsTable["Seven of Elementals"] = "Seven of Elementals"
-LootedItemsTable["Eight of Elementals"] = "Eight of Elementals"
---Misc
-LootedItemsTable["Pristine Black Diamond"] = "Pristine Black Diamond"
-LootedItemsTable["Scale of Onyxia"] = "Scale of Onyxia"
-LootedItemsTable["Brilliant Chromatic Scale"] = "Brilliant Chromatic Scale"
---NAXX
-LootedItemsTable["Wartorn Plate Scrap"] = "Plate scrap"
-LootedItemsTable["Wartorn Chain Scrap"] = "Mail Scrap"
-LootedItemsTable["Wartorn Leather Scrap"] = "leather Scrap"
-LootedItemsTable["Wartorn Cloth Scrap"] = "Cloth Scrap"
-LootedItemsTable["Frozen Rune"] = "Frozen Rune"
---AQ40
-LootedItemsTable["Idol of Death"] = "Idol of Death"
-LootedItemsTable["Idol of Life"] = "Idol of Life"
-LootedItemsTable["Idol of Night"] = "Idol of Night"
-LootedItemsTable["Idol of Rebirth"] = "Idol of Rebirth"
-LootedItemsTable["Idol of Strife"] = "Idol of Strife"
-LootedItemsTable["Idol of War"] = "Idol of War "
-LootedItemsTable["Idol of the Sage"] = "Idol of the Sage "
-LootedItemsTable["Idol of the Sun"] = "Idol of the Sun"
---BWL
-LootedItemsTable["Elementium Ore"] = "Elementium Ore"
---ZG
-LootedItemsTable["Gold Hakkari Bijou"] = "Gold Hakkari Bijou"
-LootedItemsTable["Purple Hakkari Bijou"] = "Purple Hakkari Bijou"
-LootedItemsTable["Red Hakkari Bijou"] = "Red Hakkari Bijou"
-LootedItemsTable["Green Hakkari Bijou"] = "Green Hakkari Bijou"
-LootedItemsTable["Bronze Hakkari Bijou"] = "Bronze Hakkari Bijou"
-LootedItemsTable["Silver Hakkari Bijou"] = "Silver Hakkari Bijou"
-LootedItemsTable["Yellow Hakkari Bijou"] = "Yellow Hakkari Bijou"
-LootedItemsTable["Orange Hakkari Bijou"] = "Orange Hakkari Bijou"
-LootedItemsTable["Blue Hakkari Bijou"] = "Blue Hakkari Bijou"
---AQ20
-LootedItemsTable["Clay Scarab"] = "Clay Scarab"
-LootedItemsTable["Stone Scarab"] = "Stone Scarab"
-LootedItemsTable["Gold Scarab"] = "Gold Scarab"
-LootedItemsTable["Silver Scarab"] = "Silver Scarab"
-LootedItemsTable["Bronze Scarab"] = "Bronze Scarab"
-LootedItemsTable["Bone Scarab"] = "Bone Scarab"
-LootedItemsTable["Crystal Scarab"] = "Crystal Scarab"
-LootedItemsTable["Ivory Scarab"] = "Ivory Scarab"
-LootedItemsTable["Alabaster Idol"] = "Alabaster Idol"
-LootedItemsTable["Amber Idol"] = "Amber Idol"
-LootedItemsTable["Azure Idol"] = "Azure Idol"
-LootedItemsTable["Jasper Idol"] = "Jasper Idol"
-LootedItemsTable["Lambent Idol"] = "Lambent Idol"
-LootedItemsTable["Obsidian Idol"] = "Obsidian Idol"
-LootedItemsTable["Onyx Idol"] = "Onyx Idol"
-LootedItemsTable["Vermillion Idol"] = "Vermillion Idol"
---ES
-LootedItemsTable["Fading Dream Fragment"] = "Fading Dream Fragment"
---MC
-LootedItemsTable["Fiery Core"] = "Fiery Core"
-LootedItemsTable["Lava Core"] = "Lava Core"
-LootedItemsTable["Sulfuron Ingot"] = "Sulfuron Ingot"
-LootedItemsTable["Vambraces of Prophecy"] = "Vambraces of Prophecy"
-LootedItemsTable["Girdle of Prophecy"] = "Girdle of Prophecy"
-LootedItemsTable["Earthfury Bracers"] = "Earthfury Bracers"
-LootedItemsTable["Earthfury Belt"] = "Earthfury Belt"
-LootedItemsTable["Lawbringer Bracers"] = "Lawbringer Bracers"
-LootedItemsTable["Lawbringer Belt"] = "Lawbringer Belt"
-LootedItemsTable["Nightslayer Bracelets"] = "Nightslayer Bracelets"
-LootedItemsTable["Nightslayer Belt"] = "Nightslayer Belt"
-LootedItemsTable["Giantstalker's Bracers"] = "Giantstalker's Bracers"
-LootedItemsTable["Giantstalker's Belt"] = "Giantstalker's Belt"
-LootedItemsTable["Felheart Bracers"] = "Felheart Bracers"
-LootedItemsTable["Felheart Belt"] = "Felheart Belt"
-LootedItemsTable["Cenarion Bracers"] = "Cenarion Bracers"
-LootedItemsTable["Cenarion Belt"] = "Cenarion Belt"
-LootedItemsTable["Bracers of Might"] = "Bracers of Might"
-LootedItemsTable["Belt of Might"] = "Belt of Might"
-LootedItemsTable["Arcanist Bindings"] = "Arcanist Bindings"
-LootedItemsTable["Arcanist Belt"] = "Arcanist Belt"
-
+-- Rares and epics that are subject to autoloot. [itemID] = "nickname (does nothing)"
+local LootedItems = {
+	-- Beasts Deck
+	[19227] = "Ace of Beasts",
+	[19230] = "Two of Beasts",
+	[19231] = "Three of Beasts",
+	[19232] = "Four of Beasts",
+	[19233] = "Five of Beasts",
+	[19234] = "Six of Beasts",
+	[19235] = "Seven of Beasts",
+	[19236] = "Eight of Beasts",
+	-- Warlords Deck
+	[19258] = "Ace of Warlords",
+	[19259] = "Two of Warlords",
+	[19260] = "Three of Warlords",
+	[19261] = "Four of Warlords",
+	[19262] = "Five of Warlords",
+	[19263] = "Six of Warlords",
+	[19264] = "Seven of Warlords",
+	[19265] = "Eight of Warlords",
+	-- Portals Deck
+	[19276] = "Ace of Portals",
+	[19278] = "Two of Portals",
+	[19279] = "Three of Portals",
+	[19280] = "Four of Portals",
+	[19281] = "Five of Portals",
+	[19282] = "Six of Portals",
+	[19283] = "Seven of Portals",
+	[19284] = "Eight of Portals",
+	-- Elementals Deck
+	[19268] = "Ace of Elementals",
+	[19269] = "Two of Elementals",
+	[19270] = "Three of Elementals",
+	[19271] = "Four of Elementals",
+	[19272] = "Five of Elementals",
+	[19273] = "Six of Elementals",
+	[19274] = "Seven of Elementals",
+	[19275] = "Eight of Elementals",
+	-- Misc
+	[18335] = "Pristine Black Diamond",
+	[15410] = "Scale of Onyxia",
+	[12607] = "Brilliant Chromatic Scale",
+	[83572] = "Grimoire of Demon Gate",
+	-- NAXX
+	[22376] = "Wartorn Cloth Scrap",
+	[22373] = "Wartorn Leather Scrap",
+	[22374] = "Wartorn Chain Scrap",
+	[22375] = "Wartorn Plate Scrap",
+	[22682] = "Frozen Rune",
+	-- AQ40
+	[20877] = "Idol of the Sage",
+	[20879] = "Idol of Life",
+	[20878] = "Idol of Rebirth",
+	[20874] = "Idol of the Sun",
+	[20876] = "Idol of Death",
+	[20882] = "Idol of War",
+	[20881] = "Idol of Strife",
+	[20875] = "Idol of Night",
+	-- BWL
+	[18562] = "Elementium Ore",
+	-- ZG
+	[19708] = "Blue Hakkari Bijou",
+	[19710] = "Orange Hakkari Bijou",
+	[19712] = "Purple Hakkari Bijou",
+	[19714] = "Silver Hakkari Bijou",
+	[19707] = "Red Hakkari Bijou",
+	[19709] = "Yellow Hakkari Bijou",
+	[19711] = "Green Hakkari Bijou",
+	[19713] = "Bronze Hakkari Bijou",
+	[19715] = "Gold Hakkari Bijou",
+	-- AQ20
+	[20859] = "Gold Scarab",
+	[20861] = "Bronze Scarab",
+	[20863] = "Clay Scarab",
+	[20865] = "Ivory Scarab",
+	[20858] = "Stone Scarab",
+	[20860] = "Silver Scarab",
+	[20862] = "Crystal Scarab",
+	[20864] = "Bone Scarab",
+	[20867] = "Onyx Idol",
+	[20869] = "Amber Idol",
+	[20871] = "Obsidian Idol",
+	[20873] = "Alabaster Idol",
+	[20870] = "Jasper Idol",
+	[20868] = "Lambent Idol",
+	[20872] = "Vermillion Idol",
+	[20866] = "Azure Idol",
+	-- ES
+	[61197] = "Fading Dream Fragment",
+	-- MC
+	[17203] = "Sulfuron Ingot",
+	[17011] = "Lava Core",
+	[17010] = "Fiery Core",
+	[16817] = "Girdle of Prophecy",
+	[16819] = "Vambraces of Prophecy",
+	[16825] = "Nightslayer Bracelets",
+	[16827] = "Nightslayer Belt",
+	[16851] = "Giantstalker's Belt",
+	[16850] = "Giantstalker's Bracers",
+	[16857] = "Lawbringer Bracers",
+	[16858] = "Lawbringer Belt",
+	[16861] = "Bracers of Might",
+	[16864] = "Belt of Might",
+	[16799] = "Arcanist Bindings",
+	[16802] = "Arcanist Belt",
+	[16804] = "Felheart Bracers",
+	[16806] = "Felheart Belt",
+	[16828] = "Cenarion Belt",
+	[16830] = "Cenarion Bracers",
+	[16840] = "Earthfury Bracers",
+	[16838] = "Earthfury Belt",
+}
 -- Whites and greens that are excluded from autoloot.
-ExcludedItemsTable = {}
-ExcludedItemsTable["Tome of Tranquilizing Shot"] = "Tranq Shot book"
-ExcludedItemsTable["Hazza'rah's Dream Thread"] = "Hazzarah"
-ExcludedItemsTable["Gri'lek's Blood"] = "Grilek"
-ExcludedItemsTable["Wushoolay's Mane"] = "Wushoolay"
-ExcludedItemsTable["Renataki's Tooth"] = "Renataki"
-ExcludedItemsTable["Mr. Bigglesworth"] = "KT cat"
-ExcludedItemsTable["Onyxia Hide Backpack"] = "Ony bag"
-ExcludedItemsTable["Dream Frog"] = "ES pet"
-ExcludedItemsTable["Little Ball of Spider Web"] = "Overseer pet"
-ExcludedItemsTable["Fashion Coin"] = "Fashion Coin"
+local ExcludedItems = {
+	[81283] = "Mr. Bigglesworth",
+	[51217] = "Fashion Coin",
+	[17966] = "Onyxia Hide Backpack",
+	[16665] = "Tome of Tranquilizing Shot",
+	[19939] = "Gri'lek's Blood",
+	[19940] = "Renataki's Tooth",
+	[51739] = "Little Ball of Spider Web",
+	[19942] = "Hazza'rah's Dream Thread",
+	[19941] = "Wushoolay's Mane",
+	[54001] = "Dream Frog",
+}
 
-local AutoMasterLooter = 0
-
-function AutoMasterLooterSwitch(cmd)
-	if AutoMasterLooter == 0 then
-		DEFAULT_CHAT_FRAME:AddMessage("AutoMasterLooter |cffFF0000ON")
-		AutoMasterLooter = 1
-	else
-		DEFAULT_CHAT_FRAME:AddMessage("AutoMasterLooter |cffFF0000OFF")
-		AutoMasterLooter = 0
-	end
-end
-
-SLASH_AUTOMASTERLOOTER1 = '/automasterlooter'
-SLASH_AUTOMASTERLOOTER2 = '/automl'
-SLASH_AUTOMASTERLOOTER3 = '/automasterloot'
-SlashCmdList.AUTOMASTERLOOTER = AutoMasterLooterSwitch
-
-function OpenLoot_OnEvent()
-	lootmethod, masterlooterID = GetLootMethod()
-	if masterlooterID == 0 and AutoMasterLooter == 1 then -- Only run if the player is the masterlooter.
-		local announcestring = "Epic inside! " -- Generate announce message
-		for looterindex = 1, 40 do
-			if (GetMasterLootCandidate(looterindex) == UnitName("player")) then
-				for lootedindex = 1, GetNumLootItems() do
-					lootIcon, lootName, lootQuantity, rarity = GetLootSlotInfo(lootedindex)
-					if rarity == 4 and lootName ~= "Elementium Ore" then
-						announcestring = announcestring..lootName.." ! " -- Add any found epics to the announce message. Except Elementium Ore, because it's automatically looted to the player.
-					end 
-					if rarity < 3 then
-						local IsExcludedItem = 0
-						for ExcludedTableName,ExcludedTableAnnounce in pairs(ExcludedItemsTable) do			
-							if ExcludedTableName == lootName then
-								IsExcludedItem = 1 -- Found a white/green item that shouldn't be masterlooted
-							elseif next(ExcludedItemsTable,ExcludedTableName) == nil and IsExcludedItem == 0 then
-								GiveMasterLoot(lootedindex, looterindex) -- If we went through all the items that should be excluded and none of them matched, loot the item.
+local function OnEvent()
+	if event == "PLAYER_LOGIN" then
+		AUTOML_ENABLED = AUTOML_ENABLED or false
+		DEFAULT_CHAT_FRAME:AddMessage("AutoMasterLooter |cffFF0000"..(AUTOML_ENABLED and "ON" or "OFF").."|r, type "..SLASH_AUTOMASTERLOOTER1.." to toggle.")
+	elseif event == "LOOT_OPENED" then
+		local lootmethod, masterlooterID = GetLootMethod()
+		-- Only run if the player is the masterlooter.
+		if not (masterlooterID == 0 and AUTOML_ENABLED) then
+			return
+		end
+		for i = 1, 40 do
+			if GetMasterLootCandidate(i) == UnitName("player") then
+				for slot = 1, GetNumLootItems() do
+					local lootIcon, lootName, lootQuantity, quality = GetLootSlotInfo(slot)
+					local link = GetLootSlotLink(slot)
+					local _, _, itemID = strfind(link or "", "item:(%d+)")
+					itemID = tonumber(itemID)
+					if itemID then
+						if quality < 3 then
+							if not ExcludedItems[itemID] then
+								GiveMasterLoot(slot, i)
 							end
-						end
-					else
-						for LootTableName,LootTableAnnounce in pairs(LootedItemsTable) do
-							if LootTableName == lootName or rarity <3 then
-								GiveMasterLoot(lootedindex, looterindex) -- loot item if it's gray/white/green/listed blue
+						else
+							if LootedItems[itemID] or quality < 3 then
+								GiveMasterLoot(slot, i)
 							end
 						end
 					end
 				end
+				break
 			end
 		end
-		if announcestring ~= "Epic inside! " then
-			DEFAULT_CHAT_FRAME:AddMessage(announcestring) -- Announce the message if any epics were added into it.
-			PlaySound("AuctionWindowClose") -- Play a warning sound. I chose auction house close, you can choose any sound you want from https://wowwiki-archive.fandom.com/wiki/API_PlaySound?oldid=313344 
-		end
 	end
+end
+
+local frame = CreateFrame("Frame", "AutoMasterLooterFrame" , UIParent)
+frame:RegisterEvent("PLAYER_LOGIN")
+frame:RegisterEvent("LOOT_OPENED")
+frame:SetScript("OnEvent", OnEvent)
+
+SLASH_AUTOMASTERLOOTER1 = "/automl"
+
+SlashCmdList.AUTOMASTERLOOTER = function()
+	AUTOML_ENABLED = not AUTOML_ENABLED
+	DEFAULT_CHAT_FRAME:AddMessage("AutoMasterLooter |cffFF0000"..(AUTOML_ENABLED and "ON" or "OFF"))
 end

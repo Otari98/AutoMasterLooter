@@ -2,7 +2,7 @@
 ## Title: AutoMasterLooter
 ## Notes: Automatically loot items as masterlooter
 ## Author: balake
-## Version: 2.1
-## SavedVariables: 
+## Version: 2.2
+## SavedVariables: AUTOML_ENABLED
 
 AutoMasterLooter.Lua
