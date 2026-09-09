@@ -91,24 +91,24 @@ local LootedItems = {
 	[17203] = "Sulfuron Ingot",
 	[17011] = "Lava Core",
 	[17010] = "Fiery Core",
-	[16817] = "Girdle of Prophecy",
-	[16819] = "Vambraces of Prophecy",
-	[16825] = "Nightslayer Bracelets",
-	[16827] = "Nightslayer Belt",
-	[16851] = "Giantstalker's Belt",
-	[16850] = "Giantstalker's Bracers",
-	[16857] = "Lawbringer Bracers",
-	[16858] = "Lawbringer Belt",
-	[16861] = "Bracers of Might",
-	[16864] = "Belt of Might",
-	[16799] = "Arcanist Bindings",
-	[16802] = "Arcanist Belt",
-	[16804] = "Felheart Bracers",
-	[16806] = "Felheart Belt",
-	[16828] = "Cenarion Belt",
-	[16830] = "Cenarion Bracers",
-	[16840] = "Earthfury Bracers",
-	[16838] = "Earthfury Belt",
+	-- [16817] = "Girdle of Prophecy",
+	-- [16819] = "Vambraces of Prophecy",
+	-- [16825] = "Nightslayer Bracelets",
+	-- [16827] = "Nightslayer Belt",
+	-- [16851] = "Giantstalker's Belt",
+	-- [16850] = "Giantstalker's Bracers",
+	-- [16857] = "Lawbringer Bracers",
+	-- [16858] = "Lawbringer Belt",
+	-- [16861] = "Bracers of Might",
+	-- [16864] = "Belt of Might",
+	-- [16799] = "Arcanist Bindings",
+	-- [16802] = "Arcanist Belt",
+	-- [16804] = "Felheart Bracers",
+	-- [16806] = "Felheart Belt",
+	-- [16828] = "Cenarion Belt",
+	-- [16830] = "Cenarion Bracers",
+	-- [16840] = "Earthfury Bracers",
+	-- [16838] = "Earthfury Belt",
 }
 -- Whites and greens that are excluded from autoloot.
 local ExcludedItems = {
@@ -129,37 +129,47 @@ local ExcludedItems = {
 	[37012] = "Maexxna's Hatchling",
 }
 
+local function GiveAllLoot(name)
+	if not name then return false end
+	for i = 1, 40 do
+		if strlower(GetMasterLootCandidate(i) or "") == strlower(name) then
+			for slot = 1, GetNumLootItems() do
+				local lootIcon, lootName, lootQuantity, quality = GetLootSlotInfo(slot)
+				local link = GetLootSlotLink(slot)
+				local _, _, itemID = strfind(link or "", "item:(%d+)")
+				itemID = tonumber(itemID)
+				if itemID then
+					if quality < 3 then
+						if not ExcludedItems[itemID] then
+							GiveMasterLoot(slot, i)
+						end
+					else
+						if LootedItems[itemID] then
+							GiveMasterLoot(slot, i)
+						end
+					end
+				end
+			end
+			return true
+		end
+	end
+	return false
+end
+
 local function OnEvent()
 	if event == "PLAYER_LOGIN" then
-		AUTOML_ENABLED = AUTOML_ENABLED or false
-		DEFAULT_CHAT_FRAME:AddMessage("AutoMasterLooter |cffFF0000"..(AUTOML_ENABLED and "ON" or "OFF").."|r, type "..SLASH_AUTOMASTERLOOTER1.." to toggle.")
+		AUTOML_ENABLED = AUTOML_ENABLED == nil and true or AUTOML_ENABLED
+		AUTOML_RECIEVER = AUTOML_RECIEVER == nil and UnitName("player") or AUTOML_RECIEVER
+		DEFAULT_CHAT_FRAME:AddMessage(format("AutoMasterLooter is %s, type %s to toggle.", AUTOML_ENABLED and GREEN_FONT_COLOR_CODE.."ON|r" or GRAY_FONT_COLOR_CODE.."OFF|r", SLASH_AUTOMASTERLOOTER1))
+		DEFAULT_CHAT_FRAME:AddMessage(format("AutoMasterLooter loot will be sent to %s, type %s <player_name> to change it.", GREEN_FONT_COLOR_CODE..AUTOML_RECIEVER.."|r", SLASH_AUTOMASTERLOOTER1))
 	elseif event == "LOOT_OPENED" then
 		local lootmethod, masterlooterID = GetLootMethod()
 		-- Only run if the player is the masterlooter.
 		if not (masterlooterID == 0 and AUTOML_ENABLED) then
 			return
 		end
-		for i = 1, 40 do
-			if GetMasterLootCandidate(i) == UnitName("player") then
-				for slot = 1, GetNumLootItems() do
-					local lootIcon, lootName, lootQuantity, quality = GetLootSlotInfo(slot)
-					local link = GetLootSlotLink(slot)
-					local _, _, itemID = strfind(link or "", "item:(%d+)")
-					itemID = tonumber(itemID)
-					if itemID then
-						if quality < 3 then
-							if not ExcludedItems[itemID] then
-								GiveMasterLoot(slot, i)
-							end
-						else
-							if LootedItems[itemID] or quality < 3 then
-								GiveMasterLoot(slot, i)
-							end
-						end
-					end
-				end
-				break
-			end
+		if not GiveAllLoot(AUTOML_RECIEVER) then
+			GiveAllLoot(UnitName("player"))
 		end
 	end
 end
@@ -171,7 +181,12 @@ frame:SetScript("OnEvent", OnEvent)
 
 SLASH_AUTOMASTERLOOTER1 = "/automl"
 
-SlashCmdList.AUTOMASTERLOOTER = function()
-	AUTOML_ENABLED = not AUTOML_ENABLED
-	DEFAULT_CHAT_FRAME:AddMessage("AutoMasterLooter |cffFF0000"..(AUTOML_ENABLED and "ON" or "OFF"))
+SlashCmdList.AUTOMASTERLOOTER = function(msg)
+	if msg and msg ~= "" then
+		AUTOML_RECIEVER = msg
+		DEFAULT_CHAT_FRAME:AddMessage("AutoMasterLooter loot will be sent to "..msg..".")
+	else
+		AUTOML_ENABLED = not AUTOML_ENABLED
+		DEFAULT_CHAT_FRAME:AddMessage("AutoMasterLooter "..(AUTOML_ENABLED and GREEN_FONT_COLOR_CODE.."ON|r" or GRAY_FONT_COLOR_CODE.."OFF|r"))
+	end
 end
